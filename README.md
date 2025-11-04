@@ -1,6 +1,7 @@
 # Teammates: Sammi Kwon, Thomas Walter
 
-#Overview
+# **Overview**
+
 This project was completed for CPSC 419: Full Stack Web Programming in Fall 2023. 
 
 
