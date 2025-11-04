@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Form</title>
+</head>
+<body>
+    <h1>Search Form</h1>
+    <form action="/search" method="get">
+        <table>
+            <tr>
+                <td><label for="label">Label:</label></td>
+                <td><input type="text" name="l" id="label" value="{{ prev_search_label }}"></td>
+            </tr>
+            <tr>
+                <td><label for="classifier">Classifier:</label></td>
+                <td><input type="text" name="c" id="classifier" value="{{ prev_search_classifier }}"></td>
+            </tr>
+            <tr>
+                <td><label for="agent">Agent:</label></td>
+                <td><input type="text" name="a" id="agent" value="{{ prev_search_agent }}"></td>
+            </tr>
+            <tr>
+                <td><label for="date">Date:</label></td>
+                <td><input type="text" name="d" id="date" value="{{ prev_search_date }}"></td>
+            </tr>
+        </table>
+        {% if row %}
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Date</th>
+                    <th>Agents</th>
+                    <th>Classified As</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in row %}
+                    <tr>
+                        <td valign="middle">
+                            <a href="/object/{{ row[0] }}">{{ row[1] }}</a>
+                        </td>
+                        <td valign="middle">{{ row[2] }}</td>
+                        <td valign="middle">{{ row[3]|replace('),,', '<br>')|replace('),', '')|safe }}</td>
+                        <td valign="middle">{{ row[4]|replace('),,', '<br>')|replace('),', '')|safe }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

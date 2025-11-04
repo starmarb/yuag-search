@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details for object {{ object_id }}</title>
+</head>
+<body>
+    <h1>Details for object {{ object_id }}</h1>
+
+    <section>
+        <h2>Summary</h2>
+        <table>
+            <tr>
+                <th>Accession no.</th>
+                <th>Date</th>
+                <th>Place</th>
+            </tr>
+            <tr>
+                <td>{{ summary[0][0] }}</td>
+                <td>{{ summary[0][1] }}</td>
+                <td>{{ summary[0][2] }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Label</h2>
+        <p>{{ label[0][0] }}</p>
+    </section>
+
+    <section>
+        <h2>Produced By</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Part</th>
+                    <th style="text-align: left;">Name</th>
+                    <th style="text-align: left;">Nationalities</th>
+                    <th style="text-align: left;">Timespan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in produced_by %}
+                    <tr>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                        <td>{{ item[4] }}</td>
+                        <td>
+                            {% if item[2] and item[3] %}
+                                {{ item[2] }} - {{ item[3] }}
+                            {% elif item[2] %}
+                                {{ item[2] }} -
+                            {% elif item[3] %}
+                                - {{ item[3] }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    {% if image_url %}
+        <section>
+            <h2>Image</h2>
+            <img src="{{ image_url }}" alt="Object Image">
+        </section>
+    {% endif %}
+
+    <section>
+        <h2>Classified As</h2>
+        <ul>
+            {% for item in classified_as %}
+                <li>{{ item[0] }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Information</h2>
+        <ul>
+            {% for item in information %}
+                <li><strong>{{ item[0] }}:</strong> {{ item[1]|safe }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <p><a href="/">Back to Search</a></p>
+</body>
+</html>

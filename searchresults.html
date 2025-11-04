@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Date</th>
+                <th>Agents</th>
+                <th>Classified As</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in row %}
+                <tr>
+                    <td valign="middle">
+                        <a href="/object/{{ row[0] }}">{{ row[1] }}</a>
+                    </td>
+                    <td valign="middle">{{ row[2] }}</td>
+                    <td valign="middle">{{ row[3]|replace('),,', '<br>')|safe }}</td>
+                    <td valign="middle">{{ row[4]|replace('),,', '<br>')|safe }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
