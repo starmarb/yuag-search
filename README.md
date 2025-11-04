@@ -53,7 +53,7 @@ It's a web application that allows users to search and explore the Yale Universi
 ```
 
 3. **Add the database**
-   - Download `lux.sqlite` (not included due to file size)
+   - Download `lux.sqlite` (Please reach out to Sammi Kwon for access to file, as it has limitations on access).
    - Place it in the root directory
 
 4. **Run the application**
