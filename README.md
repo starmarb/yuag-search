@@ -1,4 +1,5 @@
 # Yale University Art Gallery Search Engine
+Try out the live demo **[here](https://starmarb.github.io/yuag-search-demo/)
 
 **Teammates:** Sammi Kwon, Thomas Walter
 
