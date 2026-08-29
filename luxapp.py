@@ -1,8 +1,8 @@
 """Renders and Flasks the website"""
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, jsonify
 from flask import render_template
 import requests
-from luxinfo import get_info
+from luxinfo import get_info, search_labels
 from luxdetails import get_object_info
 
 app = Flask(__name__)
@@ -84,6 +84,14 @@ def search():
     response.set_cookie('prev_search_date', date)
 
     return response
+
+@app.route('/api/search')
+def api_search():
+    """JSON endpoint for live as-you-type search."""
+    label = request.args.get('l', '').strip()
+    if len(label) < 2:
+        return jsonify([])
+    return jsonify(search_labels(label))
 
 @app.route('/object')
 def object_error():

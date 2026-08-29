@@ -52,8 +52,23 @@ def get_info(date_arg, agt_arg, cls_arg, label_arg):
 
     except Exception as ex:
         print(ex, file=stderr)
-        exit_function(1)
+        return []
 
+def search_labels(label_arg, limit=25):
+    """Fast label-only search for the live as-you-type dropdown."""
+    db_url = "file:lux.sqlite?mode=ro"
+    try:
+        with connect(db_url, uri=True) as connection:
+            with closing(connection.cursor()) as cursor:
+                cursor.execute(
+                    "SELECT id, label, date FROM objects "
+                    "WHERE label LIKE '%' || ? || '%' "
+                    "ORDER BY label LIMIT ?;",
+                    (label_arg, limit))
+                return cursor.fetchall()
+    except Exception as ex:
+        print(ex, file=stderr)
+        return []
 
 # def _test():
 #     table = get_info('', 'gogh', '', '')
